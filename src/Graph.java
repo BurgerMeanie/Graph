@@ -92,8 +92,8 @@ public class Graph {
                 stringBuilder.append(", ");
             }
             for(Edge thisEdge: thisVertex.edges){
-                stringBuilder.append("[" + thisVertex.name + ", " + thisEdge.vertex.name +
-                        ", " + thisEdge.weight + "]");
+                stringBuilder.append("[").append(thisVertex.name).append(", ").append(thisEdge.vertex.name).append
+                        (", ").append(thisEdge.weight).append("]");
             }
         }
         return stringBuilder.toString();

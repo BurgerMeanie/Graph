@@ -41,8 +41,8 @@ class GraphTest {
         graph.addVertex("C");
         graph.addVertex("D");
 
-        assertEquals(true, graph.containsName("C"));
-        assertEquals(false, graph.containsName("Z"));
+        assertTrue(graph.containsName("C"));
+        assertFalse(graph.containsName("Z"));
     }
 
     @Test
@@ -95,6 +95,6 @@ class GraphTest {
 
         graph.addEdge("A", "E", 12.0);
 
-        System.out.println(graph.toString());
+        System.out.println(graph);
     }
 }

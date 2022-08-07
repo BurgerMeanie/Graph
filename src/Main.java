@@ -7,7 +7,7 @@ public class Main {
         Graph schedule = new Graph();
         System.out.println("Enter the classes that the student has taken already. If none, or done," +
                 " enter F to finish.");
-        String classes = "Placeholder";
+        String classes;
         classes = scnr.nextLine();
         while(!classes.contains("F")){
             schedule.addVertex(classes);
@@ -16,12 +16,12 @@ public class Main {
         return schedule;
     }
     public static void addClasses(Graph schedule){
-        String classes = "Placeholder";
+        String classes;
         ArrayList<String> prereq = new ArrayList<>();
         System.out.println("Enter the class you wish to add to the schedule. Enter F to finish.");
         classes = scnr.nextLine();
         while(!classes.contains("F")){
-            String prereqString = "Placeholder";
+            String prereqString;
             System.out.println("Enter the prerequisite(s) for the class. Enter F to finish.");
             prereqString = scnr.nextLine();
             while(!prereqString.contains("F")){
@@ -30,23 +30,23 @@ public class Main {
             }
             boolean eligible = true;
             String requirementNotFulfilled = "";
-            for(int i = 0; i < prereq.size(); i++){
-                if(!schedule.containsName(prereq.get(i))){
+            for (String s : prereq) {
+                if (!schedule.containsName(s)) {
                     eligible = false;
-                    requirementNotFulfilled = prereq.get(i);
+                    requirementNotFulfilled = s;
                 }
             }
-            if(eligible == true){
-                for(int i = 0; i < prereq.size(); i++){
-                    schedule.addVertex(prereq.get(i));
-                    schedule.addEdge(classes, prereq.get(i), 1.0);
+            if(eligible){
+                for (String s : prereq) {
+                    schedule.addVertex(s);
+                    schedule.addEdge(classes, s, 1.0);
                 }
             } else {
                 System.out.println("Student not eligible for this class. They still need to take " +
                         requirementNotFulfilled);
             }
-            for(int i = prereq.size() - 1; i >= 0; i--){
-                prereq.remove(i);
+            if (prereq.size() > 0) {
+                prereq.subList(0, prereq.size()).clear();
             }
             System.out.println("Enter the class you wish to add to the schedule. Enter F to finish.");
             classes = scnr.nextLine();
@@ -55,6 +55,6 @@ public class Main {
     public static void main(String[] args){
         Graph schedule = initialClasses();
         addClasses(schedule);
-        System.out.println(schedule.toString());
+        System.out.println(schedule);
     }
 }
