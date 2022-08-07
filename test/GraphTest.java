@@ -57,4 +57,44 @@ class GraphTest {
         assertEquals(2, graph.getIndexOfVertex("C"));
         assertEquals(-1, graph.getIndexOfVertex("Z"));
     }
+
+    @Test
+    public void testIsConnected(){
+        Graph graph = new Graph();
+
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
+        graph.addVertex("F");
+        graph.addVertex("G");
+        graph.addVertex("Z");
+
+        graph.addEdge("A", "B", 1.0);
+        graph.addEdge("A", "C", 1.0);
+        graph.addEdge("A", "E", 1.0);
+        graph.addEdge("C", "E", 1.0);
+        graph.addEdge("C", "F", 1.0);
+        graph.addEdge("E", "D", 1.0);
+        graph.addEdge("E", "A", 1.0);
+        graph.addEdge("F", "G", 1.0);
+
+        assertTrue(graph.isConnectedBreadthFirst("A", "G"));
+        assertFalse(graph.isConnectedBreadthFirst("A", "Z"));
+    }
+
+    @Test
+    public void testToString(){
+        Graph graph = new Graph();
+
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+
+        graph.addEdge("A", "E", 12.0);
+
+        System.out.println(graph.toString());
+    }
 }

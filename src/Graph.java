@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Graph {
     protected ArrayList<Vertex> vertices;
@@ -49,5 +51,46 @@ public class Graph {
             index++;
         }
         return -1;
+    }
+
+    public boolean isConnectedBreadthFirst(String startName, String endName){
+        //instantiate queue
+        Queue<Vertex> queue = new LinkedList<>();
+        //instantiate visited list
+        ArrayList<Vertex> visited = new ArrayList<>();
+
+        int index = this.getIndexOfVertex(startName);
+        queue.add(this.vertices.get(index));
+        visited.add(this.vertices.get(index));
+
+        while(!queue.isEmpty()){
+            Vertex current = queue.remove();
+            if(current.name.equals(endName)){
+                return true;
+            }
+
+            for(Edge edge: current.edges){
+                if(!visited.contains(edge.vertex)){
+                    queue.add(edge.vertex);
+                    visited.add(edge.vertex);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Vertex thisVertex: this.vertices){
+            if(!stringBuilder.isEmpty() && !thisVertex.edges.isEmpty()){
+                stringBuilder.append(", ");
+            }
+            for(Edge thisEdge: thisVertex.edges){
+                stringBuilder.append("[" + thisVertex.name + ", " + thisEdge.vertex.name +
+                        ", " + thisEdge.weight + "]");
+            }
+        }
+        return stringBuilder.toString();
     }
 }
