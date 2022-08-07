@@ -80,6 +80,11 @@ public class Graph {
         return false;
     }
 
+    public boolean isConnectedDepthFirst(String startName, String endName){
+
+        return false;
+    }
+
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
         for(Vertex thisVertex: this.vertices){
